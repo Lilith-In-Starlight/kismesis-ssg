@@ -1,1 +1,719 @@
-<what class = "uwu">a</what>
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>Stranger Eons</title>
+	<link href="https://strangereons.com/"/>
+	<updated>2023-12-24T13:05-05:00</updated>
+	<author>
+		<name>Katie Ampersand</name>
+		<email>katie-and@ampersandia.net</email>
+	</author>
+	<entry>
+		<title>Pages 446-457</title>
+		<summary>horror</summary>
+		<link href="https://strangereons.com/430.html"/>
+		<updated>2023-12-24T13:05-05:00</updated>
+		<published>2023-12-24T13:05-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/430.png" />
+	</entry>
+	<entry>
+		<title>Pages 430-445</title>
+		<summary>defenselessness</summary>
+		<link href="https://strangereons.com/430.html"/>
+		<updated>2023-12-10T13:05-05:00</updated>
+		<published>2023-12-10T13:05-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/430.png" />
+	</entry>
+	<entry>
+		<title>Pages 412-429</title>
+		<summary>defenselessness</summary>
+		<link href="https://strangereons.com/411.html"/>
+		<updated>2023-09-03T10:05-05:00</updated>
+		<published>2023-09-03T10:05-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/401.png" />
+	</entry>
+	<entry>
+		<title>Pages 402-411</title>
+		<summary>things of the "those" category</summary>
+		<link href="https://strangereons.com/401.html"/>
+		<updated>2023-08-14T14:10-05:00</updated>
+		<published>2023-08-14T14:10-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/401.png" />
+	</entry>
+	<entry>
+		<title>Pages 398-401</title>
+		<summary>things of the "those" category</summary>
+		<link href="https://strangereons.com/398.html"/>
+		<updated>2023-06-25T22:15-05:00</updated>
+		<published>2023-06-25T22:15-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/397.png" />
+	</entry>
+	<entry>
+		<title>You can now support the comic!</title>
+		<summary>You can support us via ko-fi.com/ampersandia or via buymeacoffee.com/ampersandia</summary>
+		<link href="https://ko-fi.com/ampersandia"/>
+		<updated>2023-06-13T21:10-05:00</updated>
+		<published>2023-06-13T21:10-05:00</published>
+		<category>News</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/1.png" />
+	</entry>
+	<entry>
+		<title>Pages 392-397</title>
+		<summary>those things</summary>
+		<link href="https://strangereons.com/391.html"/>
+		<updated>2023-06-07T13:10-05:00</updated>
+		<published>2023-06-07T13:10-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/397.gif" />
+	</entry>
+	<entry>
+		<title>Pages 387-391</title>
+		<summary>berb again</summary>
+		<link href="https://strangereons.com/386.html"/>
+		<updated>2023-06-05T13:15-05:00</updated>
+		<published>2023-06-05T13:15-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/387.png" />
+	</entry>
+	<entry>
+		<title>Pages 384-386</title>
+		<summary>berb. also we have a new artist</summary>
+		<link href="https://strangereons.com/383.html"/>
+		<updated>2023-05-20T13:00-05:00</updated>
+		<published>2023-05-20T13:00-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/384.png" />
+	</entry>
+	<entry>
+		<title>Pages 375-383</title>
+		<summary>clö</summary>
+		<link href="https://strangereons.com/374.html"/>
+		<updated>2023-05-13T22:45-05:00</updated>
+		<published>2023-05-13T22:45-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/374.gif" />
+	</entry>
+	<entry>
+		<title>Pages 367-374</title>
+		<summary>plans</summary>
+		<link href="https://strangereons.com/366.html"/>
+		<updated>2023-04-29T11:32-05:00</updated>
+		<published>2023-04-29T11:32-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/366.png" />
+	</entry>
+	<entry>
+		<title>Pages 357-366</title>
+		<summary>angyyyyyy</summary>
+		<link href="https://strangereons.com/356.html"/>
+		<updated>2023-04-22T17:10-05:00</updated>
+		<published>2023-04-22T17:10-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/356.png" />
+	</entry>
+	<entry>
+		<title>Pages 348-356</title>
+		<summary>angy</summary>
+		<link href="https://strangereons.com/347.html"/>
+		<updated>2023-04-16T19:20-05:00</updated>
+		<published>2023-04-16T19:20-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/348.png" />
+	</entry>
+	<entry>
+		<title>Pages 346-347</title>
+		<summary>mike</summary>
+		<link href="https://strangereons.com/345.html"/>
+		<updated>2023-04-04T21:20-05:00</updated>
+		<published>2023-04-04T21:20-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/346.png" />
+	</entry>
+	<entry>
+		<title>Page 340-345</title>
+		<summary>watch the video</summary>
+		<link href="https://strangereons.com/339.html"/>
+		<updated>2023-03-15T16:15-05:00</updated>
+		<published>2023-03-15T16:15-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/340.gif" />
+	</entry>
+	<entry>
+		<title>Page 339</title>
+		<summary>lights</summary>
+		<link href="https://strangereons.com/338.html"/>
+		<updated>2023-03-13T13:55-05:00</updated>
+		<published>2023-03-13T13:55-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/339.gif" />
+	</entry>
+	<entry>
+		<title>Pages 332 to 338</title>
+		<summary>lights</summary>
+		<link href="https://strangereons.com/331.html"/>
+		<updated>2023-03-11T18:55-05:00</updated>
+		<published>2023-03-11T18:55-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/331.gif" />
+	</entry>
+	<entry>
+		<title>Pages 324 to 331</title>
+		<summary>lights</summary>
+		<link href="https://strangereons.com/323.html"/>
+		<updated>2023-03-10T20:25-05:00</updated>
+		<published>2023-03-10T20:25-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/324.png" />
+	</entry>
+	<entry>
+		<title>Pages 321 to 323</title>
+		<summary>small update, got strangely exhausted midway</summary>
+		<link href="https://strangereons.com/320.html"/>
+		<updated>2023-03-06T15:10-05:00</updated>
+		<published>2023-03-06T15:10-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/320.gif" />
+	</entry>
+	<entry>
+		<title>Pages 318 to 321</title>
+		<summary>totally not memory crypts dot gif</summary>
+		<link href="https://strangereons.com/315.html"/>
+		<updated>2023-03-04T19:00-05:00</updated>
+		<published>2023-03-04T19:00-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/319.gif" />
+	</entry>
+	<entry>
+		<title>Pages 312 to 317</title>
+		<summary>cuckoo...?</summary>
+		<link href="https://strangereons.com/311.html"/>
+		<updated>2023-03-03T14:50-05:00</updated>
+		<published>2023-03-03T14:50-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/314.png" />
+	</entry>
+	<entry>
+		<title>Pages 309 to 311</title>
+		<summary>cuckoo!</summary>
+		<link href="https://strangereons.com/308.html"/>
+		<updated>2023-03-01T15:50-05:00</updated>
+		<published>2023-03-01T15:50-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/311.png" />
+	</entry>
+	<entry>
+		<title>Pages 305 to 308</title>
+		<summary>oof</summary>
+		<link href="https://strangereons.com/304.html"/>
+		<updated>2023-02-28T15:25-05:00</updated>
+		<published>2023-02-28T15:25-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/305.png" />
+	</entry>
+	<entry>
+		<title>Pages 300 to 304</title>
+		<summary>oof</summary>
+		<link href="https://strangereons.com/300.html"/>
+		<updated>2023-02-27T14:25-05:00</updated>
+		<published>2023-02-27T14:25-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/300.png" />
+	</entry>
+	<entry>
+		<title>Pages 297 to 300</title>
+		<summary>not quite a gun, but otherwise chekhov</summary>
+		<link href="https://strangereons.com/296.html"/>
+		<updated>2023-01-22T00:25-05:00</updated>
+		<published>2023-01-22T00:25-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/297.png" />
+	</entry>
+	<entry>
+		<title>Pages 292 to 296</title>
+		<summary>father</summary>
+		<link href="https://strangereons.com/291.html"/>
+		<updated>2022-11-24T14:50-05:00</updated>
+		<published>2022-11-24T14:50-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/292.png" />
+	</entry>
+	<entry>
+		<title>Pages 286 to 291</title>
+		<summary>science lab</summary>
+		<link href="https://strangereons.com/285.html"/>
+		<updated>2022-11-14T13:32-05:00</updated>
+		<published>2022-11-14T13:32-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/286.png" />
+	</entry>
+	<entry>
+		<title>Pages 283 to 285</title>
+		<summary>nothing there</summary>
+		<link href="https://strangereons.com/282.html"/>
+		<updated>2022-10-31T15:35-05:00</updated>
+		<published>2022-10-31T15:35-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/283.png" />
+	</entry>
+	<entry>
+		<title>Pages 274 - 281</title>
+		<summary>erth</summary>
+		<link href="https://strangereons.com/273.html"/>
+		<updated>2022-10-30T22:35-05:00</updated>
+		<published>2022-10-30T22:35-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/274.png" />
+	</entry>
+	<entry>
+		<title>Page 273 (6 panels)</title>
+		<summary>cool story bro</summary>
+		<link href="https://strangereons.com/273.html"/>
+		<updated>2022-10-23T10:50-05:00</updated>
+		<published>2022-10-23T10:50-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/273.png" />
+	</entry>
+	<entry>
+		<title>Pages 267 to 273</title>
+		<summary>cool guy</summary>
+		<link href="https://strangereons.com/266.html"/>
+		<updated>2022-10-16T01:35-05:00</updated>
+		<published>2022-10-16T15:35-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/267.gif" />
+	</entry>
+	<entry>
+		<title>Pages 252 to 266</title>
+		<summary>child?</summary>
+		<link href="https://strangereons.com/252.html"/>
+		<updated>2022-10-09T15:30-05:00</updated>
+		<published>2022-10-09T15:30-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/252.png" />
+	</entry>
+	<entry>
+		<title>Pages 250 to 261</title>
+		<summary>child D:</summary>
+		<link href="https://strangereons.com/249.html"/>
+		<updated>2022-10-05T15:50-05:00</updated>
+		<published>2022-10-05T15:50-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/250.gif" />
+	</entry>
+	<entry>
+		<title>Page 249 (3 panels)</title>
+		<summary>child</summary>
+		<link href="https://strangereons.com/248.html"/>
+		<updated>2022-09-28T10:24-05:00</updated>
+		<published>2022-09-28T10:24-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/249.png" />
+	</entry>
+	<entry>
+		<title>Pages 240 to 248</title>
+		<summary>child</summary>
+		<link href="https://strangereons.com/239.html"/>
+		<updated>2022-09-25T15:12-05:00</updated>
+		<published>2022-09-25T15:12-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/236.png" />
+	</entry>
+	<entry>
+		<title>Pages 236 to 239</title>
+		<summary>child</summary>
+		<link href="https://strangereons.com/235.html"/>
+		<updated>2022-09-21T12:36-05:00</updated>
+		<published>2022-09-21T12:36-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/236.png" />
+	</entry>
+	<entry>
+		<title>Pages 232 to 235</title>
+		<summary>Recalling</summary>
+		<link href="https://strangereons.com/231.html"/>
+		<updated>2022-09-16T18:05-05:00</updated>
+		<published>2022-09-16T18:05-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/232.png" />
+	</entry>
+	<entry>
+		<title>Pages 228 to 231</title>
+		<summary>Jerks</summary>
+		<link href="https://strangereons.com/227.html"/>
+		<updated>2022-09-13T15:30-05:00</updated>
+		<published>2022-09-13T15:30-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/228.png" />
+	</entry>
+	<entry>
+		<title>Pages 225 to 227</title>
+		<summary>Claw gets startled</summary>
+		<link href="https://strangereons.com/224.html"/>
+		<updated>2022-09-12T14:40-05:00</updated>
+		<published>2022-09-12T14:40-05:00</published>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/225.gif" />
+	</entry>
+	<entry>
+		<title>Pages 220 to 224</title>
+		<summary>Clever</summary>
+		<link href="https://strangereons.com/219.html"/>
+		<updated>2022-09-10T08:51-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/220.png" />
+	</entry>
+	<entry>
+		<title>Pages 215 to 219</title>
+		<summary>Clever</summary>
+		<link href="https://strangereons.com/214.html"/>
+		<updated>2022-09-08T14:45-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/214.png" />
+	</entry>
+	<entry>
+		<title>Pages 214 (5 panels)</title>
+		<summary>royalty</summary>
+		<link href="https://strangereons.com/213.html"/>
+		<updated>2022-09-05T12:46-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/213.png" />
+	</entry>
+	<entry>
+		<title>Pages 211 to 213</title>
+		<summary>highness</summary>
+		<link href="https://strangereons.com/210.html"/>
+		<updated>2022-09-03T12:23-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/210.png" />
+	</entry>
+	<entry>
+		<title>Pages 205 to 210</title>
+		<summary>midnight revelations</summary>
+		<link href="https://strangereons.com/204.html"/>
+		<updated>2022-09-02T15:00-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/204.png" />
+	</entry>
+	<entry>
+		<title>Pages 198 to 204</title>
+		<summary>sacks of flesh</summary>
+		<link href="https://strangereons.com/197.html"/>
+		<updated>2022-08-31T00:37-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/197.png" />
+	</entry>
+	<entry>
+		<title>Pages 191 to 197</title>
+		<summary>youre late</summary>
+		<link href="https://strangereons.com/190.html"/>
+		<updated>2022-08-30T02:20-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/190.png" />
+	</entry>
+	<entry>
+		<title>Pages 182 to 190</title>
+		<summary>eye stalks</summary>
+		<link href="https://strangereons.com/181.html"/>
+		<updated>2022-08-29T16:35-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/181.png" />
+	</entry>
+	<entry>
+		<title>Pages 178 to 181</title>
+		<summary>eye stalks</summary>
+		<link href="https://strangereons.com/177.html"/>
+		<updated>2022-08-27T10:15-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/177.png" />
+	</entry>
+	<entry>
+		<title>Pages 165 to 177</title>
+		<summary>personal problems</summary>
+		<link href="https://strangereons.com/164.html"/>
+		<updated>2022-08-26T13:30-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/164.png" />
+	</entry>
+	<entry>
+		<title>Pages 160 to 164</title>
+		<summary>personal mysteries</summary>
+		<link href="https://strangereons.com/159.html"/>
+		<updated>2022-08-25T13:35-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/159.png" />
+	</entry>
+	<entry>
+		<title>Pages 157 to 159</title>
+		<summary>family mysteries</summary>
+		<link href="https://strangereons.com/157.html"/>
+		<updated>2022-08-19T14:25-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/157.png" />
+	</entry>
+	<entry>
+		<title>Pages 151 to 157</title>
+		<summary>not phone</summary>
+		<link href="https://strangereons.com/140.html"/>
+		<updated>2022-08-17T14:30-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/140.png" />
+	</entry>
+	<entry>
+		<title>Pages 148 to 150</title>
+		<summary>not phone</summary>
+		<link href="https://strangereons.com/147.html"/>
+		<updated>2022-08-16T13:36-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/147.png" />
+	</entry>
+	<entry>
+		<title>Pages 143 to 147</title>
+		<summary>phone</summary>
+		<link href="https://strangereons.com/142.html"/>
+		<updated>2022-08-12T16:08-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/142.png" />
+	</entry>
+	<entry>
+		<title>Pages 140 to 142</title>
+		<summary>phone</summary>
+		<link href="https://strangereons.com/139.html"/>
+		<updated>2022-08-08T13:50-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/139.png" />
+	</entry>
+	<entry>
+		<title>Pages 133 to 139</title>
+		<summary>phone</summary>
+		<link href="https://strangereons.com/132.html"/>
+		<updated>2022-08-07T13:20-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/132.png" />
+	</entry>
+	<entry>
+		<title>Pages 125 to 133</title>
+		<summary>i'm back babyyyyyy</summary>
+		<link href="https://strangereons.com/124.html"/>
+		<updated>2022-08-03T16:00-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/124.png" />
+	</entry>
+	<entry>
+		<title>Pages 119 to 124</title>
+		<summary>what</summary>
+		<link href="https://strangereons.com/118.html"/>
+		<updated>2022-07-27T23:21-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/118.png" />
+	</entry>
+	<entry>
+		<title>Pages 114 to 118</title>
+		<summary>vroom</summary>
+		<link href="https://strangereons.com/113.html"/>
+		<updated>2022-07-23T14:25-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/113.png" />
+	</entry>
+	<entry>
+		<title>Pages 110 to 114</title>
+		<summary>computer.mp4</summary>
+		<link href="https://strangereons.com/109.html"/>
+		<updated>2022-07-19T15:50-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/109.png" />
+	</entry>
+	<entry>
+		<title>Pages 105 to 109</title>
+		<summary>mars nerds out about something</summary>
+		<link href="https://strangereons.com/104.html"/>
+		<updated>2022-07-14T14:15-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/104.png" />
+	</entry>
+	<entry>
+		<title>Page 104 (4 panels)</title>
+		<summary>Room</summary>
+		<link href="https://strangereons.com/103.html"/>
+		<updated>2022-07-11T16:05-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/103.png" />
+	</entry>
+	<entry>
+		<title>Pages 101 to 103</title>
+		<summary>our boy</summary>
+		<link href="https://strangereons.com/100.html"/>
+		<updated>2022-07-07T14:31-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/100.png" />
+	</entry>
+	<entry>
+		<title>Pages 96 to 100</title>
+		<summary>CW for flashing lights and violent imagery</summary>
+		<link href="https://strangereons.com/95.html"/>
+		<updated>2022-07-04T01:11-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/95.png" />
+	</entry>
+	<entry>
+		<title>Pages 91 to 95</title>
+		<summary>toodles</summary>
+		<link href="https://strangereons.com/90.html"/>
+		<updated>2022-06-28T15:15-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/90.png" />
+	</entry>
+	<entry>
+		<title>humans</title>
+		<summary>they're scary</summary>
+		<link href="https://strangereons.com/86.html"/>
+		<updated>2022-06-27T12:00-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/86.png" />
+	</entry>
+	<entry>
+		<title>eyeball</title>
+		<summary>he sees</summary>
+		<link href="https://strangereons.com/83.html"/>
+		<updated>2022-06-23T23:35-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/83.png" />
+	</entry>
+	<entry>
+		<title>END OF CHAPTER 1 ACT 1</title>
+		<summary>PLEASE STAND BY</summary>
+		<link href="https://strangereons.com/67.html"/>
+		<updated>2022-06-20T00:23-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/67.png" />
+	</entry>
+	<entry>
+		<title>Pages 62 to 67</title>
+		<summary>water monke</summary>
+		<link href="https://strangereons.com/61.html"/>
+		<updated>2022-06-17T00:05-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/61.png" />
+	</entry>
+	<entry>
+		<title>Pages 54 to 61</title>
+		<summary>monke</summary>
+		<link href="https://strangereons.com/53.html"/>
+		<updated>2022-06-15T16:10-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/53.png" />
+	</entry>
+	<entry>
+		<title>Pages 45 to 53</title>
+		<summary>I made an animation!!! (or i tried. its my first time doing smth like this)</summary>
+		<link href="https://strangereons.com/44.html"/>
+		<updated>2022-06-12T16:50-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/44.png" />
+	</entry>
+	<entry>
+		<title>Pages 42 to 44 (8 panels)</title>
+		<summary>Sari??????</summary>
+		<link href="https://strangereons.com/41.html"/>
+		<updated>2022-06-06T01:27-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/41.png" />
+	</entry>
+	<entry>
+		<title>Pages 37 to 41</title>
+		<summary>Sari enters</summary>
+		<link href="https://strangereons.com/36.html"/>
+		<updated>2022-06-04T09:06-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/36.png" />
+	</entry>
+	<entry>
+		<title>New Matrix Room!</title>
+		<summary>Just in case there are readers who prefer it over matrix</summary>
+		<link href="https://matrix.to/#/#stranger_eons:tchncs.de"/>
+		<updated>2022-06-02T18:12-05:00</updated>
+		<category>Notification</category>
+	</entry>
+	<entry>
+		<title>Pages 33 to 36</title>
+		<summary>Sari keeps going up</summary>
+		<link href="https://strangereons.com/32.html"/>
+		<updated>2022-06-01T15:20-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/32.png" />
+	</entry>
+	<entry>
+		<title>Pages 22 to 32</title>
+		<summary>I forgor to push this one to the feed oh no</summary>
+		<link href="https://strangereons.com/21.html"/>
+		<updated>2022-05-31T13:55-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/21.png" />
+	</entry>
+	<entry>
+		<title>Separated the RSS feed</title>
+		<summary>It now should be easier to follow the updates</summary>
+		<link href="https://strangereons.com/rss.xml"/>
+		<updated>2022-05-31T13:55-05:00</updated>
+		<category>Notification</category>
+	</entry>
+	<entry>
+		<title>Stranger Eons - Pages 27 to 21</title>
+		<summary>I'm an RSS feed that became sentient AMA</summary>
+		<link href="https://strangereons.com/26.html"/>
+		<updated>2022-05-28T16:18-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/26.png" />
+	</entry>
+	<entry>
+		<title>Stranger Eons - Pages 22 to 26</title>
+		<summary>I am the RSS notifications.</summary>
+		<link href="https://strangereons.com/21.html"/>
+		<updated>2022-05-26T11:25-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/21.png" />
+	</entry>
+	<entry>
+		<title>Hi sorry yea i messed up the rss</title>
+		<summary>Stranger Eons release should work now</summary>
+		<link href="https://strangereons.com/15.html"/>
+		<updated>2022-05-21T22:50-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/15.png" />
+	</entry>
+	<entry>
+		<title>Stranger Eons - Pages 16 to 21</title>
+		<summary>Sari is now outside.</summary>
+		<link href="https://strangereons.com/15.html"/>
+		<updated>2022-05-21T21:55-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/15.png" />
+	</entry>
+	<entry>
+		<title>Stranger Eons - Pages 10 to 15</title>
+		<summary>It's going to be a long way down.</summary>
+		<link href="https://strangereons.com/9.html"/>
+		<updated>2022-05-19T23:53-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/9.png" />
+	</entry>
+	<entry>
+		<title>Stranger Eons - Pages 3 to 9</title>
+		<summary>Sari's done exploring her room. What will she do now?</summary>
+		<link href="https://strangereons.com/2.html"/>
+		<updated>2022-05-17T13:02-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/2.png" />
+	</entry>
+	<entry>
+		<title>New webcomic - Stranger Eons</title>
+		<summary>I can't promise I will finish it, but I've for sure begun it.</summary>
+		<link href="https://strangereons.com"/>
+		<updated>2022-05-16T13:02-05:00</updated>
+		<category>Pages</category>
+		<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://strangereons.com/img/1.png" />
+	</entry>
+</feed>
