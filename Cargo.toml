@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.4.16", features = ["derive"] }
-kismesis = { path = "../combinators" , features = ["plugins", "projects"]}
+kismesis = { version = "0.1.10" , features = ["plugins", "projects"]}
 
 [profile.dev]
 lto="off"
