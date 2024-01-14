@@ -18,7 +18,7 @@ enum Commands {
 	},
 }
 
-const DEFAULT_TEMPLATE: &str = r#"var title
+const DEFAULT_TEMPLATE: &str = r#"mut title
 
 <!doctype html>
 <html lang="EN-US":
