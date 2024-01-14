@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: linux-build
-          files: 
+          path: 
             target/release/kismesis-ssg_amd64
 
   build-win:
@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: win-build
-          files: 
+          path: 
             target/release/kismesis-ssg.exe
 
   build-mac:
@@ -77,5 +77,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mac-build
-          files: 
+          path: 
             target/release/kismesis-ssg_darwin
