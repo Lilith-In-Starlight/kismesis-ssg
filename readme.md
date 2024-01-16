@@ -21,7 +21,7 @@ Kismesis is a static site generator with macros, plugins and spite, encouraging 
 - Make a plugin manager
 - Allow plugins to create new subcommands for the CLI
 
-Check the [Kismesis Engine readme](https://github.com/lilith-in-starligh/kismesis) for a roadmap pertaining to the language and the generator's engine.
+Check the [Kismesis Engine readme](https://github.com/lilith-in-starlight/kismesis) for a roadmap pertaining to the language and the generator's engine.
 
 ## FAQ
 FAQ stands for both Forwardly Anticipated Questions and Frequently-ish Asked Questions.
