@@ -34,7 +34,7 @@ jobs:
         run: cargo login ${{ secrets.CRATES_IO_TOKEN }}
 
       - name: Cargo Publish
-        run: cargo publish
+        run: cargo publish --allow-dirty
 
   build-win:
     runs-on: windows-latest

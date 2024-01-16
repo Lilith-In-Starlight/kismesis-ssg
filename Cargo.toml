@@ -2,12 +2,16 @@
 name = "kismesis-ssg"
 version = "0.1.3"
 edition = "2021"
+description = "A static site generator with plugins and macros."
+license-file = "LICENSE.md"
+repository = "https://github.com/lilith-in-starlight/kismesis-ssg"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 clap = { version = "4.4.16", features = ["derive"] }
-kismesis = { path = "../combinators" , features = ["plugins", "projects"]}
+kismesis = { path = "../combinators" , features = ["projects"]}
 
-[profile.dev]
-lto="off"
+[features]
+default=["plugins"]
+plugins=["kismesis/plugins"]
