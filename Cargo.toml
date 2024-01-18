@@ -10,7 +10,9 @@ repository = "https://github.com/lilith-in-starlight/kismesis-ssg"
 
 [dependencies]
 clap = { version = "4.4.16", features = ["derive"] }
-kismesis = { path = "../combinators" , features = ["projects"]}
+directories = "5.0.1"
+kismesis = { path = "../kismesis-engine" , features = ["reporting"]}
+ron = "0.8.1"
 
 [features]
 default=["plugins"]

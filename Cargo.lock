@@ -1104,9 +1104,7 @@ name = "kismesis"
 version = "0.1.10"
 dependencies = [
  "colored",
- "directories",
  "extism",
- "ron",
  "serde",
  "serde_json",
  "termsize",
@@ -1117,7 +1115,9 @@ name = "kismesis-ssg"
 version = "0.1.3"
 dependencies = [
  "clap",
+ "directories",
  "kismesis",
+ "ron",
 ]
 
 [[package]]

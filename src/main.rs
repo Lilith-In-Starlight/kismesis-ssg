@@ -1,3 +1,5 @@
+mod compile;
+
 use std::{fs, path::PathBuf};
 
 use clap::{Parser, Subcommand};
@@ -51,7 +53,7 @@ fn main() {
 	let cli = Kismesis::parse();
 
 	match cli.command {
-		Some(Commands::Build) => kismesis::compiler::compile_project(),
+		Some(Commands::Build) => compile::compile_project(),
 		Some(Commands::New { name }) => new(name.unwrap_or(".".to_string())),
 		None => println!("The Kismesis TUI is currently not implemented"),
 	}
