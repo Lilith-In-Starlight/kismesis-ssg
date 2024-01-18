@@ -15,7 +15,6 @@ struct Kismesis {
 enum Commands {
 	Build,
 	New {
-		#[arg(short, long)]
 		name: Option<String>,
 	},
 }
@@ -49,7 +48,6 @@ With its example content
 "#;
 
 fn main() {
-	println!("Kismesis Command Line Utility by Katie Ampersand");
 	let cli = Kismesis::parse();
 
 	match cli.command {
@@ -63,7 +61,7 @@ fn new(name: String) {
 	let name = PathBuf::from(name);
 	match name.try_exists() {
 		Ok(x) if x => match fs::read_dir(&name) {
-			Ok(x) => if !x.count() == 0 {
+			Ok(x) => if x.count() != 0 {
 				return eprintln!("The given path exists and is not empty, so a Kismesis project cannot be created in it")
 			},
 			Err(_) => return eprintln!("Couldn't check if the given path is empty"),
