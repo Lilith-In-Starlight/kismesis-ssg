@@ -1,0 +1,3 @@
+[submodule "kismesis"]
+	path = kismesis
+	url = https://github.com/lilith-in-starlight/kismesis
