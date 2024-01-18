@@ -7,7 +7,7 @@ Kismesis is a static site generator with macros, plugins and spite, encouraging 
 - **Compile-time errors:** Kismesis will give you a visual report of your errors, signaling where they happened, similar to what the Rust compiler does.
 - **Macros:** Custom HTML tags you can define in order to use them anywhere to make tasks less repetitive.
 - **(UNSTABLE!) Plugins:** A way for users to add new features to Kismesis.
-- **(TO DO!) A Standard Library:** Ever miss the <marquee> tag? In Kismesis, you're not allowed to use deprecated tags, however it will come with a <marquee?> plugin, which will aim to replicate the behavior using only widely supported featues.
+- **(TO DO!) A Standard Library:** Ever miss the `<marquee>` tag? In Kismesis, you're not allowed to use deprecated tags, however it will come with a `<marquee?>` plugin, which will aim to replicate the behavior using only widely supported featues.
 
 # How To Use
 - Download one of the builds from the releases and add it to your `$PATH` environment variable. I recommend that you rename the executable to `kismesis` instead of `kismesis-ssg`
