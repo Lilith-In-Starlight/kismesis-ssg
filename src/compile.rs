@@ -187,6 +187,7 @@ pub fn recursive_crawl(path: &Path) -> (Vec<PathBuf>, Vec<io::Error>) {
 }
 
 pub fn report_errors(errors: Vec<Error>, engine: &Kismesis) {
+    eprintln!("\n");
     for error in errors {
         match error {
             Error::IO(error, path) => eprintln!("Error reading `{}`: {}", path.to_string_lossy(), error),
