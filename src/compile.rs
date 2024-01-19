@@ -27,7 +27,7 @@ pub enum Error {
 #[cfg(feature = "plugins")]
 fn check_for_plugins(program_path: &directories::ProjectDirs, engine: &mut Kismesis) {
     let plugin_dir = program_path.data_dir().join("plugins");
-    let plugin_paths = fs::read_dir(plugin_dir).unwrap();
+    let Ok(plugin_paths) = fs::read_dir(plugin_dir) else { return };
     for entry in plugin_paths {
         let entry = entry.unwrap();
         let path = entry.path();
