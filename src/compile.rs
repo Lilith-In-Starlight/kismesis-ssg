@@ -54,13 +54,11 @@ pub(crate) fn compile_project() {
 
     check_for_plugins(&program_path, &mut engine);
 
-    let project_path = std::env::current_dir().unwrap();
-
     let main_template_path = PathBuf::from("templates/main.ks");
     let template_paths = recursive_crawl(&PathBuf::from("templates")).0;
 
     for path in template_paths {
-        match engine.register_file(path, Some(project_path.clone())) {
+        match engine.register_file(path) {
             Ok(x) => {
                 engine.register_template(x);
             }
@@ -82,7 +80,7 @@ pub(crate) fn compile_project() {
 
     let settings = Settings::new();
     for path in input_paths {
-        let parsed_file = match engine.register_file(path, Some(project_path.clone())) {
+        let parsed_file = match engine.register_file(path) {
             Ok(mut x) => {
                 x.template = Some(main_template_id.clone());
                 x
