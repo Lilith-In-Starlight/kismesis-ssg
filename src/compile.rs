@@ -54,6 +54,7 @@ pub(crate) fn compile_project() {
 
     check_for_plugins(&program_path, &mut engine);
 
+
     let main_template_path = PathBuf::from("templates/main.ks");
     let template_paths = recursive_crawl(&PathBuf::from("templates")).0;
 
