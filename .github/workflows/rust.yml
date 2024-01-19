@@ -22,19 +22,13 @@ jobs:
           override: true
 
       - name: Build
-        run: cargo build --all --release && strip target/release/kismesis-ssg && mv target/release/kismesis-ssg target/release/kismesis-ssg_amd64
+        run: cargo build --all --release && strip target/release/kismesis && mv target/release/kismesis target/release/kismesis_amd64
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: linux-build
-          path: target/release/kismesis-ssg_amd64
-
-      - name: Cargo Login
-        run: cargo login ${{ secrets.CRATES_IO_TOKEN }}
-
-      - name: Cargo Publish
-        run: cargo publish --allow-dirty
+          path: target/release/kismesis_amd64
 
   build-win:
     runs-on: windows-latest
@@ -57,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: win-build
-          path: target/release/kismesis-ssg.exe
+          path: target/release/kismesis.exe
 
   build-mac:
     runs-on: macos-latest
@@ -75,10 +69,10 @@ jobs:
           override: true
 
       - name: Build for mac
-        run: cargo build --all --release && strip target/release/kismesis-ssg && mv target/release/kismesis-ssg target/release/kismesis-ssg_darwin
+        run: cargo build --all --release && strip target/release/kismesis && mv target/release/kismesis target/release/kismesis_darwin
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-build
-          path: target/release/kismesis-ssg_darwin
+          path: target/release/kismesis_darwin
