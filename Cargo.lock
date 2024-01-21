@@ -946,6 +946,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d77f7ec81a6d05a3abb01ab6eb7590f6083d08449fe5a1c8b1e620283546ccb7"
 
 [[package]]
+name = "htmlize"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6507eaed4d57bf58786aabd4ebc91a7d702d1fdace5ccc6479de1aee666765dd"
+dependencies = [
+ "memchr",
+ "paste",
+]
+
+[[package]]
 name = "iana-time-zone"
 version = "0.1.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1101,10 +1111,11 @@ dependencies = [
 
 [[package]]
 name = "kismesis"
-version = "0.1.14"
+version = "0.1.17"
 dependencies = [
  "colored",
  "extism",
+ "htmlize",
  "serde",
  "serde_json",
  "termsize",
