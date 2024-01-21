@@ -1111,7 +1111,7 @@ dependencies = [
 
 [[package]]
 name = "kismesis"
-version = "0.1.17"
+version = "0.1.16"
 dependencies = [
  "colored",
  "extism",
@@ -1123,7 +1123,7 @@ dependencies = [
 
 [[package]]
 name = "kismesis-ssg"
-version = "0.1.8"
+version = "0.1.7"
 dependencies = [
  "clap",
  "directories",
