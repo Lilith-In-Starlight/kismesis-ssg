@@ -15,7 +15,7 @@ path = "src/main.rs"
 [dependencies]
 clap = { version = "4.4.16", features = ["derive"] }
 directories = "5.0.1"
-kismesis = { path = "kismesis" , features = ["reporting"]}
+kismesis = { version = "0.1.18" , features = ["reporting"]}
 ron = "0.8.1"
 
 [features]
