@@ -1112,6 +1112,8 @@ dependencies = [
 [[package]]
 name = "kismesis"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc7e2768280eae0a3a5e50fbe41445b7ca58b98a6585d41ea57c082bfdce21c4"
 dependencies = [
  "colored",
  "extism",
