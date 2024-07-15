@@ -6,7 +6,6 @@ use std::{
 
 use kismesis::{
     html,
-    options::Settings,
     parser::errors::Err,
     plugins,
     reporting::{self, draw_error, DrawingInfo, ReportKind},
@@ -79,7 +78,6 @@ pub(crate) fn compile_project() {
     };
     let input_paths = recursive_crawl(&PathBuf::from("input")).0;
 
-    let settings = Settings::new();
     for path in input_paths {
         let parsed_file = match engine.register_file(path) {
             Ok(mut x) => {
@@ -91,7 +89,7 @@ pub(crate) fn compile_project() {
                 continue;
             }
         };
-        match html::generate_html(&parsed_file, vec![], &settings, &engine) {
+        match html::compile(&parsed_file, &engine) {
             Ok(x) => {
                 let output_path = PathBuf::from("output");
                 let file = match engine.get_file(parsed_file.file_id) {
