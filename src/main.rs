@@ -7,7 +7,7 @@ use compile::report_errors;
 use kismesis::options::Settings;
 use once_cell::sync::Lazy;
 use ron::{de::SpannedError, ser::PrettyConfig};
-use std::{fs, path::PathBuf};
+use std::{env::set_current_dir, fs, path::PathBuf};
 
 #[derive(Parser)]
 #[command(name = "kismesis")]
@@ -175,12 +175,13 @@ enum CouldntParseSettings {
 }
 
 fn get_settings() -> Result<Settings, CouldntParseSettings> {
-    let mut tries = 0;
     let settings_string = loop {
         match std::fs::read_to_string(".kismet") {
             Ok(x) => break x,
-            Err(_) if tries == 20 => return Err(CouldntParseSettings::CouldntRead),
-            Err(_) => tries += 1,
+            Err(_) => match set_current_dir("../") {
+                Ok(_) => (),
+                Err(_) => return Err(CouldntParseSettings::CouldntRead),
+            },
         }
     };
 
