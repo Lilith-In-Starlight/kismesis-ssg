@@ -1,4 +1,4 @@
-mut title
+$mut title
 
 <!-- This is the kismesis example page -->
 

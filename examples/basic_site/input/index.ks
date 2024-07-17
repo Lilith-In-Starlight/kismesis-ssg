@@ -1,4 +1,4 @@
-const title = "Example title"
+$const title = "Example title"
 
 # @title
 
