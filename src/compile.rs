@@ -5,11 +5,11 @@ use std::{
 };
 
 use kismesis::{
-    html,
+    html::{self, ScopedError},
     parser::errors::Err,
     plugins,
-    reporting::{self, draw_error, DrawingInfo, ReportKind},
-    KisID, Kismesis, KismesisError,
+    reporting::{DrawingInfo, Report, ReportKind},
+    KisTokenId, Kismesis, KismesisError,
 };
 
 /// An Enum containing all the possible errors that the process of compiling a project might emit
@@ -17,9 +17,8 @@ pub enum Error {
     IO(io::Error, PathBuf),
     NoMainTemplate,
     OutputNotInOutputFolder(PathBuf),
-    TemplateInOutputFolder(PathBuf),
-    Parse(Vec<Err>, KisID),
-    TriedToGetNonExistentTemplate(KisID),
+    Parse(Vec<Err>, KisTokenId),
+    TriedToGetNonExistentTemplate(KisTokenId),
 }
 
 /// Loads all the plugins in the plugins directory
@@ -67,13 +66,13 @@ pub(crate) fn compile_project() {
     }
 
     if !errors.is_empty() {
-        report_errors(errors, &engine);
+        report_errors(&errors, &engine);
         return;
     }
 
     let Some(main_template_id) = engine.verify_template_id(main_template_path) else {
         errors.push(Error::NoMainTemplate);
-        report_errors(errors, &engine);
+        report_errors(&errors, &engine);
         return;
     };
     let input_paths = recursive_crawl(&PathBuf::from("input")).0;
@@ -120,13 +119,7 @@ pub(crate) fn compile_project() {
                             continue;
                         }
                     };
-                    let file_text = match x.to_string() {
-                        Ok(x) => x,
-                        Err(_) => {
-                            errors.push(Error::TemplateInOutputFolder(path.clone()));
-                            continue;
-                        }
-                    };
+                    let file_text = x.to_string();
                     match write!(file, "{}", file_text) {
                         Ok(x) => {
                             engine.drop_id(&parsed_file.file_id);
@@ -141,14 +134,14 @@ pub(crate) fn compile_project() {
             }
             Err(errors) => {
                 for error in errors {
-                    eprintln!("{}", reporting::draw_scoped_error(&error, &engine));
+                    error.report(ReportKind::Error, &DrawingInfo::default(), &engine, 0);
                 }
             }
         }
     }
 
     if !errors.is_empty() {
-        report_errors(errors, &engine)
+        report_errors(&errors, &engine)
     }
 }
 
@@ -183,16 +176,16 @@ pub fn recursive_crawl(path: &Path) -> (Vec<PathBuf>, Vec<io::Error>) {
     (paths, errors)
 }
 
-pub fn report_errors(errors: Vec<Error>, engine: &Kismesis) {
+pub fn report_errors(errors: &[Error], engine: &Kismesis) {
     eprintln!("\n");
     for error in errors {
         match error {
             Error::IO(error, path) => eprintln!("Error reading `{}`: {}", path.to_string_lossy(), error),
             Error::NoMainTemplate => eprintln!("Coudln't compile project because it doesn't have a template in templates/main.ks"),
             Error::OutputNotInOutputFolder(path) => eprintln!("Tried to output {} to a location outside the project's output folder.\n\nThis is meant to be impossible, please contact the developer at https://ampersandia.net/", path.to_string_lossy()),
-            Error::TemplateInOutputFolder(path) => eprintln!("{} is a template, but it is in the input folder", path.to_string_lossy()),
             Error::Parse(error, id) => for error in error {
-				eprintln!("{}", draw_error(&error.unpack(), &DrawingInfo::from(id, engine, ReportKind::Error), engine, 0));
+                let error = Into::<ScopedError<_>>::into((*id, error.clone().unpack()));
+				error.report(ReportKind::Error, &DrawingInfo::default(), engine, 0);
 			},
 			Error::TriedToGetNonExistentTemplate(id) => eprintln!("Tried to get a non-existent kismesis template {:?}", id)
         }
