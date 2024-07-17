@@ -4,6 +4,7 @@ auto-format = false
 indent = {unit="\t", tab-width=4}
 
 [language-server.rust-analyzer.config]
+cargo.features = ["server"]
 cargo.noDefaultFeatures = true
 check.command = "clippy"
 inlayHints.typeHints = false

@@ -54,122 +54,199 @@ This is an example page
 With its example content
 "#;
 
+#[derive(Debug)]
+pub enum ErrorCodes {
+    NewFileFailed(FileCreationFailure),
+    CouldntParseSettings(CouldntParseSettings),
+    BuildFailed,
+    NotImplemented,
+}
+
+fn build_fn(settings: Settings) -> Result<(), ErrorCodes> {
+    let mut engine = kismesis::Kismesis::new();
+    engine.settings = settings;
+    println!("Building project...");
+    match compile::compile_project(&mut engine) {
+        Ok(()) => {
+            println!("Project build successfully");
+            Ok(())
+        }
+        Err(errors) => {
+            report_errors(&errors, &engine);
+            Err(ErrorCodes::BuildFailed)
+        }
+    }
+}
+
 #[cfg(feature = "server")]
 #[actix_web::main]
-async fn main() {
+async fn main() -> Result<(), ErrorCodes> {
     let cli = Kismesis::parse();
 
     match cli.command {
-        Some(Commands::Build) => {
-            let settings = match get_settings() {
-                Ok(x) => x,
-                Err(CouldntParseSettings::CouldntRead) => {
-                    return eprintln!("Couldn't read .kismet file")
-                }
-                Err(CouldntParseSettings::CouldntParse(error)) => {
-                    return eprintln!("Couldn't parse .kismet file: {error}")
-                }
-            };
-            let mut engine = kismesis::Kismesis::new();
-            engine.settings = settings;
-            match compile::compile_project(&mut engine) {
-                Ok(()) => (),
-                Err(errors) => report_errors(&errors, &engine),
-            }
+        Some(Commands::Build) => get_settings_and(build_fn),
+        Some(Commands::New { name }) => match new(name.unwrap_or(".".to_string())) {
+            Ok(()) => Ok(()),
+            Err(x) => Err(ErrorCodes::NewFileFailed(x)),
+        },
+        Some(Commands::Run) => {
+            get_settings_and(build_fn)?;
+            println!("Starting server: http://127.0.0.1/8080");
+            let server_result = server::start().await;
+            println!("Server finished");
+            server_result.unwrap();
+            Ok(())
         }
-        Some(Commands::New { name }) => new(name.unwrap_or(".".to_string())),
-        Some(Commands::Run) => server::start().await.unwrap(),
-        None => println!("The Kismesis TUI is currently not implemented"),
+        None => {
+            eprintln!("The Kismesis TUI is currently not implemented");
+            Err(ErrorCodes::NotImplemented)
+        }
+    }
+}
+
+fn get_settings_and<F>(and: F) -> Result<(), ErrorCodes>
+where
+    F: Fn(Settings) -> Result<(), ErrorCodes>,
+{
+    match get_settings() {
+        Ok(settings) => and(settings),
+        Err(x @ CouldntParseSettings::CouldntRead) => {
+            eprintln!("Couldn't read .kismet file");
+            Err(ErrorCodes::CouldntParseSettings(x))
+        }
+        Err(ref x @ CouldntParseSettings::CouldntParse(ref error)) => {
+            eprintln!("Couldn't parse .kismet file: {error}");
+            Err(ErrorCodes::CouldntParseSettings(x.to_owned()))
+        }
     }
 }
 
 #[cfg(not(feature = "server"))]
-fn main() {
+fn main() -> Result<(), ErrorCodes> {
     let cli = Kismesis::parse();
 
     match cli.command {
-        Some(Commands::Build) => {
-            let settings = match get_settings() {
-                Ok(x) => x,
-                Err(CouldntParseSettings::CouldntRead) => {
-                    return eprintln!("Couldn't read .kismet file")
-                }
-                Err(CouldntParseSettings::CouldntParse(error)) => {
-                    return eprintln!("Couldn't parse .kismet file: {error}")
-                }
-            };
-            let mut engine = kismesis::Kismesis::new();
-            engine.settings = settings;
-            match compile::compile_project(&mut engine) {
-                Ok(()) => (),
-                Err(errors) => report_errors(&errors, &engine),
-            }
-        }
-        Some(Commands::New { name }) => new(name.unwrap_or(".".to_string())),
+        Some(Commands::Build) => get_settings_and(build_fn),
+        Some(Commands::New { name }) => match new(name.unwrap_or(".".to_string())) {
+            Ok(()) => Ok(()),
+            Err(x) => Err(ErrorCodes::NewFileFailed(x)),
+        },
         Some(Commands::Run) => {
-            eprintln!("This version of Kismesis was not compiled with the server feature.")
+            eprintln!("This version of Kismesis wasn't compiled with the server feature");
+            Err(ErrorCodes::NotImplemented)
         }
-        None => println!("The Kismesis TUI is currently not implemented"),
+        None => {
+            eprintln!("The Kismesis TUI is currently not implemented");
+            Err(ErrorCodes::NotImplemented)
+        }
     }
 }
 
-fn new(name: String) {
+#[derive(Debug)]
+pub enum FileCreationFailure {
+    PathExistsAndNotEmpty,
+    CouldntCheckPathIsEmpty,
+    CouldntCreatePath,
+    CouldntCheckPathExists,
+    CouldntCreateInput,
+    CouldntCreateOutput,
+    CouldntCreateTemplates,
+    CouldntCreateMain,
+    CouldntCreateIndex,
+    CouldntCreateKismet,
+    CouldntSerializeSettings,
+}
+
+fn new(name: String) -> Result<(), FileCreationFailure> {
     let name = PathBuf::from(name);
     match name.try_exists() {
         Ok(x) if x => match fs::read_dir(&name) {
             Ok(x) => {
                 if x.count() != 0 {
-                    return eprintln!("The given path exists and is not empty, so a Kismesis project cannot be created in it");
+                    eprintln!("The given path exists and is not empty, so a Kismesis project cannot be created in it");
+                    return Err(FileCreationFailure::PathExistsAndNotEmpty);
                 }
             }
-            Err(_) => return eprintln!("Couldn't check if the given path is empty"),
+            Err(_) => {
+                eprintln!("Couldn't check if the given path is empty");
+                return Err(FileCreationFailure::CouldntCheckPathIsEmpty);
+            }
         },
         Ok(_) => match fs::create_dir(&name) {
             Ok(_) => (),
-            Err(_) => return eprintln!("Failed to create create the given path"),
+            Err(_) => {
+                eprintln!("Failed to create create the given path");
+                return Err(FileCreationFailure::CouldntCreatePath);
+            }
         },
-        Err(_) => return eprintln!("Couldn't check if the given path exists"),
+        Err(_) => {
+            eprintln!("Couldn't check if the given path exists");
+            return Err(FileCreationFailure::CouldntCheckPathExists);
+        }
     }
 
     match fs::create_dir(name.clone().join("input")) {
         Ok(_) => (),
-        Err(_) => return eprintln!("Couldn't create the input folder for the project"),
+        Err(_) => {
+            eprintln!("Couldn't create the input folder for the project");
+            return Err(FileCreationFailure::CouldntCreateInput);
+        }
     }
 
     match fs::create_dir(name.clone().join("output")) {
         Ok(_) => (),
-        Err(_) => return eprintln!("Couldn't create the output folder for the project"),
+        Err(_) => {
+            eprintln!("Couldn't create the output folder for the project");
+            return Err(FileCreationFailure::CouldntCreateOutput);
+        }
     }
 
     match fs::create_dir(name.clone().join("templates")) {
         Ok(_) => (),
-        Err(_) => return eprintln!("Couldn't create the folder for the project's templates"),
+        Err(_) => {
+            eprintln!("Couldn't create the folder for the project's templates");
+            return Err(FileCreationFailure::CouldntCreateTemplates);
+        }
     }
 
     println!("Created all folders in the specified path");
 
     match fs::write(name.clone().join("templates/main.ks"), DEFAULT_TEMPLATE) {
         Ok(_) => (),
-        Err(_) => return eprintln!("Failed to create default example template"),
+        Err(_) => {
+            eprintln!("Failed to create default example template");
+            return Err(FileCreationFailure::CouldntCreateMain);
+        }
     }
 
     match fs::write(name.clone().join("input/index.ks"), DEFAULT_INDEX) {
         Ok(_) => (),
-        Err(_) => return eprintln!("Failed to create default example input file"),
+        Err(_) => {
+            eprintln!("Failed to create default example input file");
+            return Err(FileCreationFailure::CouldntCreateIndex);
+        }
     }
 
     match ron::ser::to_string_pretty(&Settings::default(), DEFAULT_PRETTY_SETTINGS.clone()) {
         Ok(settings) => match fs::write(name.join(".kismet"), settings) {
             Ok(_) => (),
-            Err(_) => return eprintln!("Failed to create default example input file"),
+            Err(_) => {
+                eprintln!("Failed to create default kismet file");
+                return Err(FileCreationFailure::CouldntCreateKismet);
+            }
         },
-        Err(_) => return eprintln!("Failed to create .kismet file contents from default settings"),
+        Err(_) => {
+            eprintln!("Failed to create .kismet file contents from default settings");
+            return Err(FileCreationFailure::CouldntSerializeSettings);
+        }
     }
 
-    println!("Created project! Enter the respective folder if you're not already in it, and run `kismesis build`")
+    println!("Created project! Enter the respective folder if you're not already in it, and run `kismesis build`");
+    Ok(())
 }
 
-enum CouldntParseSettings {
+#[derive(Clone, Debug)]
+pub enum CouldntParseSettings {
     CouldntRead,
     CouldntParse(SpannedError),
 }
