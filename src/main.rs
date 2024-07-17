@@ -175,8 +175,13 @@ enum CouldntParseSettings {
 }
 
 fn get_settings() -> Result<Settings, CouldntParseSettings> {
-    let Ok(settings_string) = std::fs::read_to_string(".kismet") else {
-        return Err(CouldntParseSettings::CouldntRead);
+    let mut tries = 0;
+    let settings_string = loop {
+        match std::fs::read_to_string(".kismet") {
+            Ok(x) => break x,
+            Err(_) if tries == 20 => return Err(CouldntParseSettings::CouldntRead),
+            Err(_) => tries += 1,
+        }
     };
 
     let settings_string = settings_string.trim();
