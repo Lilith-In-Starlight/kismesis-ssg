@@ -4,10 +4,12 @@ use std::{
     path::{Path, PathBuf},
 };
 
+#[cfg(feature="plugins")]
+use kismesis::plugins;
+
 use kismesis::{
     html::{self, CompilerError, MaybeUnscoped, ScopedError},
     parser::errors::Err,
-    plugins,
     reporting::{DrawingInfo, Report, ReportKind},
     KisTokenId, Kismesis, KismesisError,
 };
@@ -41,7 +43,7 @@ fn check_for_plugins(program_path: &directories::ProjectDirs, engine: &mut Kisme
 
 /// Loads all the plugins in the plugins directory
 #[cfg(not(feature = "plugins"))]
-fn check_for_plugins(program_path: &directories::ProjectDirs, engine: &mut Kismesis) {
+fn check_for_plugins(_program_path: &directories::ProjectDirs, _engine: &mut Kismesis) {
     println!("Plugins are not being registered because this version of Kismesis was compiled without plugins")
 }
 
