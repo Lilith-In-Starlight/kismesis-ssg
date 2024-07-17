@@ -17,7 +17,7 @@ enum Commands {
     New { name: Option<String> },
 }
 
-const DEFAULT_TEMPLATE: &str = r#"mut title
+const DEFAULT_TEMPLATE: &str = r#"$mut title
 
 <!doctype html>
 <html lang="EN-US":
@@ -35,7 +35,7 @@ const DEFAULT_TEMPLATE: &str = r#"mut title
 >
 "#;
 
-const DEFAULT_INDEX: &str = r#"const title = "Example title"
+const DEFAULT_INDEX: &str = r#"$const title = "Example title"
 
 # @title
 
@@ -101,4 +101,36 @@ fn new(name: String) {
     }
 
     println!("Created project! Enter the respective folder if you're not already in it, and run `kismesis build`")
+}
+
+#[cfg(test)]
+mod tests {
+    use kismesis::Kismesis;
+    use kismesis::html;
+
+    use crate::compile::report_errors;
+    use crate::DEFAULT_INDEX;
+    use crate::DEFAULT_TEMPLATE;
+
+    #[test]
+    fn test_default_files() {
+        let mut errors = vec![];
+		let mut engine = Kismesis::new();
+		match engine
+			.register_str(DEFAULT_TEMPLATE) {
+		    Ok(template) => {
+        		let template = engine.register_template(template);
+        		match engine.register_str(DEFAULT_INDEX) {
+        		    Ok(mut input) => {
+                		input.template = Some(template);
+                		println!("{:#?}", html::compile(&input, &engine));
+        		    }
+        		    Err(x) => errors.push(x.into()),
+        		}
+		    },
+		    Err(x) => errors.push(x.into()),
+		}
+		report_errors(&errors, &engine);
+		assert!(errors.is_empty())
+    }
 }
