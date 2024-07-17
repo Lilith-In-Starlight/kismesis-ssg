@@ -1,0 +1,4 @@
+(
+	plugins: [],
+	post_processing_pipeline: [],
+)

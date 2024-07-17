@@ -1,9 +1,13 @@
 mod compile;
+#[cfg(feature = "server")]
 mod server;
 
-use std::{fs, path::PathBuf};
 use clap::{Parser, Subcommand};
 use compile::report_errors;
+use kismesis::options::Settings;
+use once_cell::sync::Lazy;
+use ron::{de::SpannedError, ser::PrettyConfig};
+use std::{fs, path::PathBuf};
 
 #[derive(Parser)]
 #[command(name = "kismesis")]
@@ -18,6 +22,9 @@ enum Commands {
     New { name: Option<String> },
     Run,
 }
+
+static DEFAULT_PRETTY_SETTINGS: Lazy<PrettyConfig> =
+    Lazy::new(|| PrettyConfig::new().indentor("\t".to_owned()));
 
 const DEFAULT_TEMPLATE: &str = r#"$mut title
 
@@ -47,13 +54,24 @@ This is an example page
 With its example content
 "#;
 
+#[cfg(feature = "server")]
 #[actix_web::main]
 async fn main() {
     let cli = Kismesis::parse();
 
     match cli.command {
         Some(Commands::Build) => {
+            let settings = match get_settings() {
+                Ok(x) => x,
+                Err(CouldntParseSettings::CouldntRead) => {
+                    return eprintln!("Couldn't read .kismet file")
+                }
+                Err(CouldntParseSettings::CouldntParse(error)) => {
+                    return eprintln!("Couldn't parse .kismet file: {error}")
+                }
+            };
             let mut engine = kismesis::Kismesis::new();
+            engine.settings = settings;
             match compile::compile_project(&mut engine) {
                 Ok(()) => (),
                 Err(errors) => report_errors(&errors, &engine),
@@ -61,6 +79,36 @@ async fn main() {
         }
         Some(Commands::New { name }) => new(name.unwrap_or(".".to_string())),
         Some(Commands::Run) => server::start().await.unwrap(),
+        None => println!("The Kismesis TUI is currently not implemented"),
+    }
+}
+
+#[cfg(not(feature = "server"))]
+fn main() {
+    let cli = Kismesis::parse();
+
+    match cli.command {
+        Some(Commands::Build) => {
+            let settings = match get_settings() {
+                Ok(x) => x,
+                Err(CouldntParseSettings::CouldntRead) => {
+                    return eprintln!("Couldn't read .kismet file")
+                }
+                Err(CouldntParseSettings::CouldntParse(error)) => {
+                    return eprintln!("Couldn't parse .kismet file: {error}")
+                }
+            };
+            let mut engine = kismesis::Kismesis::new();
+            engine.settings = settings;
+            match compile::compile_project(&mut engine) {
+                Ok(()) => (),
+                Err(errors) => report_errors(&errors, &engine),
+            }
+        }
+        Some(Commands::New { name }) => new(name.unwrap_or(".".to_string())),
+        Some(Commands::Run) => {
+            eprintln!("This version of Kismesis was not compiled with the server feature.")
+        }
         None => println!("The Kismesis TUI is currently not implemented"),
     }
 }
@@ -105,12 +153,50 @@ fn new(name: String) {
         Err(_) => return eprintln!("Failed to create default example template"),
     }
 
-    match fs::write(name.join("input/index.ks"), DEFAULT_INDEX) {
+    match fs::write(name.clone().join("input/index.ks"), DEFAULT_INDEX) {
         Ok(_) => (),
         Err(_) => return eprintln!("Failed to create default example input file"),
     }
 
+    match ron::ser::to_string_pretty(&Settings::default(), DEFAULT_PRETTY_SETTINGS.clone()) {
+        Ok(settings) => match fs::write(name.join(".kismet"), settings) {
+            Ok(_) => (),
+            Err(_) => return eprintln!("Failed to create default example input file"),
+        },
+        Err(_) => return eprintln!("Failed to create .kismet file contents from default settings"),
+    }
+
     println!("Created project! Enter the respective folder if you're not already in it, and run `kismesis build`")
+}
+
+enum CouldntParseSettings {
+    CouldntRead,
+    CouldntParse(SpannedError),
+}
+
+fn get_settings() -> Result<Settings, CouldntParseSettings> {
+    let Ok(settings_string) = std::fs::read_to_string(".kismet") else {
+        return Err(CouldntParseSettings::CouldntRead);
+    };
+
+    let settings_string = settings_string.trim();
+
+    if settings_string.is_empty() {
+        let settings = Settings::default();
+        match ron::ser::to_string_pretty(&settings, DEFAULT_PRETTY_SETTINGS.clone()) {
+            Ok(settings) => match fs::write(".kismet", settings) {
+                Ok(_) => (),
+                Err(_) => eprintln!("Failed to create default example input file"),
+            },
+            Err(_) => eprintln!("Failed to create .kismet file contents from default settings"),
+        }
+        Ok(settings)
+    } else {
+        match ron::from_str::<Settings>(settings_string) {
+            Ok(settings) => Ok(settings),
+            Err(error) => Err(CouldntParseSettings::CouldntParse(error)),
+        }
+    }
 }
 
 #[cfg(test)]
@@ -125,6 +211,8 @@ mod tests {
 
     use crate::compile;
     use crate::compile::report_errors;
+    use crate::get_settings;
+    use crate::CouldntParseSettings;
     use crate::DEFAULT_INDEX;
     use crate::DEFAULT_TEMPLATE;
 
@@ -160,7 +248,21 @@ mod tests {
             let dir = dir.expect("Error getting the DirEntry");
             let path = dir.path();
             set_current_dir(&path).expect("Error setting current dir to path");
+            let settings = match get_settings() {
+                Ok(x) => x,
+                Err(CouldntParseSettings::CouldntRead) => {
+                    fail = true;
+                    eprintln!("Couldn't read .kismet file");
+                    continue;
+                }
+                Err(CouldntParseSettings::CouldntParse(error)) => {
+                    fail = true;
+                    eprintln!("Couldn't parse .kismet file: {error}");
+                    continue;
+                }
+            };
             let mut engine = kismesis::Kismesis::new();
+            engine.settings = settings;
             match compile::compile_project(&mut engine) {
                 Ok(()) => (),
                 Err(errors) => {
