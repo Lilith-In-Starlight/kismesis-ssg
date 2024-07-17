@@ -5,7 +5,7 @@ use std::{
 };
 
 use kismesis::{
-    html::{self, ScopedError},
+    html::{self, CompilerError, MaybeUnscoped, ScopedError},
     parser::errors::Err,
     plugins,
     reporting::{DrawingInfo, Report, ReportKind},
@@ -13,12 +13,14 @@ use kismesis::{
 };
 
 /// An Enum containing all the possible errors that the process of compiling a project might emit
+#[derive(Debug)]
 pub enum Error {
     IO(io::Error, PathBuf),
     NoMainTemplate,
     OutputNotInOutputFolder(PathBuf),
     Parse(Vec<Err>, KisTokenId),
     TriedToGetNonExistentTemplate(KisTokenId),
+    Compiler(MaybeUnscoped<CompilerError>)
 }
 
 /// Loads all the plugins in the plugins directory
@@ -27,11 +29,11 @@ fn check_for_plugins(program_path: &directories::ProjectDirs, engine: &mut Kisme
     let plugin_dir = program_path.data_dir().join("plugins");
     let Ok(plugin_paths) = fs::read_dir(plugin_dir) else { return };
     for entry in plugin_paths {
-        let entry = entry.unwrap();
+        let entry = entry.expect("Couldn't read plugins path");
         let path = entry.path();
         let data = path.join("plugin.ron");
         let data =
-            ron::from_str::<plugins::PluginData>(&fs::read_to_string(data).unwrap()).unwrap();
+            ron::from_str::<plugins::PluginData>(&fs::read_to_string(data).expect("Couldn't read plugin data path")).expect("Couldn't parse plugin data");
         let plugin_path = path.join("plugin.wasm");
         engine.register_plugin(data.name, &plugin_path);
     }
@@ -44,13 +46,12 @@ fn check_for_plugins(program_path: &directories::ProjectDirs, engine: &mut Kisme
 }
 
 /// Compile a kismesis project
-pub(crate) fn compile_project() {
+pub(crate) fn compile_project(engine: &mut Kismesis) -> Result<(), Vec<Error>> {
     let mut errors = Vec::new();
-    let mut engine = Kismesis::new();
     let program_path =
-        directories::ProjectDirs::from("net.ampersandia", "ampersandia", "kismesis").unwrap();
+        directories::ProjectDirs::from("net.ampersandia", "ampersandia", "kismesis").expect("Couldn't get program path");
 
-    check_for_plugins(&program_path, &mut engine);
+    check_for_plugins(&program_path, engine);
 
 
     let main_template_path = PathBuf::from("templates/main.ks");
@@ -66,14 +67,14 @@ pub(crate) fn compile_project() {
     }
 
     if !errors.is_empty() {
-        report_errors(&errors, &engine);
-        return;
+        // report_errors(&errors, &engine);
+        return Err(errors);
     }
 
     let Some(main_template_id) = engine.verify_template_id(main_template_path) else {
         errors.push(Error::NoMainTemplate);
-        report_errors(&errors, &engine);
-        return;
+        // report_errors(&errors, &engine);
+        return Err(errors);
     };
     let input_paths = recursive_crawl(&PathBuf::from("input")).0;
 
@@ -88,14 +89,14 @@ pub(crate) fn compile_project() {
                 continue;
             }
         };
-        match html::compile(&parsed_file, &engine) {
+        match html::compile(&parsed_file, engine) {
             Ok(x) => {
                 let output_path = PathBuf::from("output");
                 let file = match engine.get_file(parsed_file.file_id) {
                     Some(x) => x,
                     None => {
                         errors.push(Error::TriedToGetNonExistentTemplate(parsed_file.file_id));
-                        return;
+                        return Err(errors);
                     }
                 };
                 if let Some(path) = &file.path {
@@ -132,16 +133,20 @@ pub(crate) fn compile_project() {
                     };
                 }
             }
-            Err(errors) => {
-                for error in errors {
-                    error.report(ReportKind::Error, &DrawingInfo::default(), &engine, 0);
-                }
+            Err(new_errors) => {
+                errors.append(&mut new_errors.into_iter().map(|x| x.into()).collect());
+                // for error in errors {
+                //     error.report(ReportKind::Error, &DrawingInfo::default(), &engine, 0);
+                // }
             }
         }
     }
 
     if !errors.is_empty() {
-        report_errors(&errors, &engine)
+        Err(errors)
+        // report_errors(&errors, &engine)
+    } else {
+        Ok(())
     }
 }
 
@@ -187,7 +192,8 @@ pub fn report_errors(errors: &[Error], engine: &Kismesis) {
                 let error = Into::<ScopedError<_>>::into((*id, error.clone().unpack()));
 				error.report(ReportKind::Error, &DrawingInfo::default(), engine, 0);
 			},
-			Error::TriedToGetNonExistentTemplate(id) => eprintln!("Tried to get a non-existent kismesis template {:?}", id)
+			Error::TriedToGetNonExistentTemplate(id) => eprintln!("Tried to get a non-existent kismesis template {:?}", id),
+			Error::Compiler(error) => error.report(ReportKind::Error, &DrawingInfo::default(), engine, 0)
         }
     }
 }
@@ -198,5 +204,11 @@ impl From<KismesisError> for Error {
             KismesisError::IOError(x, y) => Error::IO(x, y),
             KismesisError::ParseError(x, y) => Error::Parse(x, y),
         }
+    }
+}
+
+impl From<MaybeUnscoped<CompilerError>> for Error {
+    fn from(value: MaybeUnscoped<CompilerError>) -> Self {
+        Self::Compiler(value)
     }
 }
