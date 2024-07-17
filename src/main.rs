@@ -1,7 +1,7 @@
 mod compile;
+mod server;
 
 use std::{fs, path::PathBuf};
-
 use clap::{Parser, Subcommand};
 use compile::report_errors;
 
@@ -16,6 +16,7 @@ struct Kismesis {
 enum Commands {
     Build,
     New { name: Option<String> },
+    Run,
 }
 
 const DEFAULT_TEMPLATE: &str = r#"$mut title
@@ -46,7 +47,8 @@ This is an example page
 With its example content
 "#;
 
-fn main() {
+#[actix_web::main]
+async fn main() {
     let cli = Kismesis::parse();
 
     match cli.command {
@@ -58,6 +60,7 @@ fn main() {
             }
         }
         Some(Commands::New { name }) => new(name.unwrap_or(".".to_string())),
+        Some(Commands::Run) => server::start().await.unwrap(),
         None => println!("The Kismesis TUI is currently not implemented"),
     }
 }
