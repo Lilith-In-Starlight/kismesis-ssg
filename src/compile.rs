@@ -8,8 +8,8 @@ use std::{
 use kismesis::plugins;
 
 use kismesis::{
-    html::{self, CompilerError, MaybeUnscoped, ScopedError},
-    parser::errors::Err,
+    html::{self, CompilerError, MaybeUnscoped},
+    parser::errors::{Err, Unpack},
     reporting::{DrawingInfo, Report, ReportKind},
     KisTokenId, Kismesis, KismesisError,
 };
@@ -20,7 +20,7 @@ pub enum Error {
     IO(io::Error, PathBuf),
     NoMainTemplate,
     OutputNotInOutputFolder(PathBuf),
-    Parse(Vec<Err>, KisTokenId),
+    Parse(Vec<Err>),
     TriedToGetNonExistentTemplate(KisTokenId),
     Compiler(MaybeUnscoped<CompilerError>)
 }
@@ -190,8 +190,8 @@ pub fn report_errors(errors: &[Error], engine: &Kismesis) {
             Error::IO(error, path) => eprintln!("Error reading `{}`: {}", path.to_string_lossy(), error),
             Error::NoMainTemplate => eprintln!("Coudln't compile project because it doesn't have a template in templates/main.ks"),
             Error::OutputNotInOutputFolder(path) => eprintln!("Tried to output {} to a location outside the project's output folder.\n\nThis is meant to be impossible, please contact the developer at https://ampersandia.net/", path.to_string_lossy()),
-            Error::Parse(error, id) => for error in error {
-                let error = Into::<ScopedError<_>>::into((*id, error.clone().unpack()));
+            Error::Parse(error) => for error in error {
+                let error = error.unpack_ref().clone();
 				error.report(ReportKind::Error, &DrawingInfo::default(), engine, 0);
 			},
 			Error::TriedToGetNonExistentTemplate(id) => eprintln!("Tried to get a non-existent kismesis template {:?}", id),
@@ -204,7 +204,7 @@ impl From<KismesisError> for Error {
     fn from(value: KismesisError) -> Self {
         match value {
             KismesisError::IOError(x, y) => Error::IO(x, y),
-            KismesisError::ParseError(x, y) => Error::Parse(x, y),
+            KismesisError::ParseError(x) => Error::Parse(x),
         }
     }
 }

@@ -68,7 +68,7 @@ fn build_fn(settings: Settings) -> Result<(), ErrorCodes> {
     println!("Building project...");
     match compile::compile_project(&mut engine) {
         Ok(()) => {
-            println!("Project build successfully");
+            println!("Project built successfully");
             Ok(())
         }
         Err(errors) => {
