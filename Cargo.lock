@@ -1433,7 +1433,9 @@ dependencies = [
 
 [[package]]
 name = "kismesis"
-version = "0.4.1"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f4d1999011752532b8ce20814738f47e3af142e390bbd939d93c7db145b01210"
 dependencies = [
  "colored",
  "extism",
@@ -1445,7 +1447,7 @@ dependencies = [
 
 [[package]]
 name = "kismesis-ssg"
-version = "0.3.2"
+version = "0.4.0"
 dependencies = [
  "actix-files",
  "actix-web",
