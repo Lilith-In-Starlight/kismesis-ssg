@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+#![warn(clippy::nursery)]
 mod compile;
 #[cfg(feature = "server")]
 mod server;
@@ -66,7 +68,7 @@ fn build_fn(settings: Settings) -> Result<(), ErrorCodes> {
     let mut engine = kismesis::Kismesis::new();
     engine.settings = settings;
     println!("Building project...");
-    match compile::compile_project(&mut engine) {
+    match compile::compile(&mut engine) {
         Ok(()) => {
             println!("Project built successfully");
             Ok(())
@@ -127,7 +129,7 @@ fn main() -> Result<(), ErrorCodes> {
 
     match cli.command {
         Some(Commands::Build) => get_settings_and(build_fn),
-        Some(Commands::New { name }) => match new(name.unwrap_or(".".to_string())) {
+        Some(Commands::New { name }) => match new(name.unwrap_or_else(|| ".".to_string())) {
             Ok(()) => Ok(()),
             Err(x) => Err(ErrorCodes::NewFileFailed(x)),
         },
@@ -160,85 +162,66 @@ pub enum FileCreationFailure {
 fn new(name: String) -> Result<(), FileCreationFailure> {
     let name = PathBuf::from(name);
     match name.try_exists() {
-        Ok(x) if x => match fs::read_dir(&name) {
-            Ok(x) => {
+        Ok(x) if x => {
+            if let Ok(x) = fs::read_dir(&name) {
                 if x.count() != 0 {
                     eprintln!("The given path exists and is not empty, so a Kismesis project cannot be created in it");
                     return Err(FileCreationFailure::PathExistsAndNotEmpty);
                 }
-            }
-            Err(_) => {
+            } else {
                 eprintln!("Couldn't check if the given path is empty");
                 return Err(FileCreationFailure::CouldntCheckPathIsEmpty);
             }
-        },
-        Ok(_) => match fs::create_dir(&name) {
-            Ok(_) => (),
-            Err(_) => {
+        }
+        Ok(_) => {
+            if fs::create_dir(&name).is_err() {
                 eprintln!("Failed to create create the given path");
                 return Err(FileCreationFailure::CouldntCreatePath);
             }
-        },
+        }
         Err(_) => {
             eprintln!("Couldn't check if the given path exists");
             return Err(FileCreationFailure::CouldntCheckPathExists);
         }
     }
 
-    match fs::create_dir(name.clone().join("input")) {
-        Ok(_) => (),
-        Err(_) => {
-            eprintln!("Couldn't create the input folder for the project");
-            return Err(FileCreationFailure::CouldntCreateInput);
-        }
+    if fs::create_dir(name.join("input")).is_err() {
+        eprintln!("Couldn't create the input folder for the project");
+        return Err(FileCreationFailure::CouldntCreateInput);
     }
 
-    match fs::create_dir(name.clone().join("output")) {
-        Ok(_) => (),
-        Err(_) => {
-            eprintln!("Couldn't create the output folder for the project");
-            return Err(FileCreationFailure::CouldntCreateOutput);
-        }
+    if fs::create_dir(name.join("output")).is_err() {
+        eprintln!("Couldn't create the output folder for the project");
+        return Err(FileCreationFailure::CouldntCreateOutput);
     }
 
-    match fs::create_dir(name.clone().join("templates")) {
-        Ok(_) => (),
-        Err(_) => {
-            eprintln!("Couldn't create the folder for the project's templates");
-            return Err(FileCreationFailure::CouldntCreateTemplates);
-        }
+    if fs::create_dir(name.join("templates")).is_err() {
+        eprintln!("Couldn't create the folder for the project's templates");
+        return Err(FileCreationFailure::CouldntCreateTemplates);
     }
 
     println!("Created all folders in the specified path");
 
-    match fs::write(name.clone().join("templates/main.ks"), DEFAULT_TEMPLATE) {
-        Ok(_) => (),
-        Err(_) => {
-            eprintln!("Failed to create default example template");
-            return Err(FileCreationFailure::CouldntCreateMain);
-        }
+    if fs::write(name.join("templates/main.ks"), DEFAULT_TEMPLATE).is_err() {
+        eprintln!("Failed to create default example template");
+        return Err(FileCreationFailure::CouldntCreateMain);
     }
 
-    match fs::write(name.clone().join("input/index.ks"), DEFAULT_INDEX) {
-        Ok(_) => (),
-        Err(_) => {
-            eprintln!("Failed to create default example input file");
-            return Err(FileCreationFailure::CouldntCreateIndex);
-        }
+    if fs::write(name.join("input/index.ks"), DEFAULT_INDEX).is_err() {
+        eprintln!("Failed to create default example input file");
+        return Err(FileCreationFailure::CouldntCreateIndex);
     }
 
-    match ron::ser::to_string_pretty(&Settings::default(), DEFAULT_PRETTY_SETTINGS.clone()) {
-        Ok(settings) => match fs::write(name.join(".kismet"), settings) {
-            Ok(_) => (),
-            Err(_) => {
-                eprintln!("Failed to create default kismet file");
-                return Err(FileCreationFailure::CouldntCreateKismet);
-            }
-        },
-        Err(_) => {
-            eprintln!("Failed to create .kismet file contents from default settings");
-            return Err(FileCreationFailure::CouldntSerializeSettings);
+    if let Ok(settings) =
+        ron::ser::to_string_pretty(&Settings::default(), DEFAULT_PRETTY_SETTINGS.clone())
+    {
+        if fs::write(name.join(".kismet"), settings).is_err() {
+            eprintln!("Failed to create default kismet file");
+            return Err(FileCreationFailure::CouldntCreateKismet);
         }
+    } else {
+        eprintln!("Failed to create .kismet file contents from default settings");
+        return Err(FileCreationFailure::CouldntSerializeSettings);
     }
 
     println!("Created project! Enter the respective folder if you're not already in it, and run `kismesis build`");
@@ -252,13 +235,15 @@ pub enum CouldntParseSettings {
 }
 
 fn get_settings() -> Result<Settings, CouldntParseSettings> {
+    let mut idx = 0;
     let settings_string = loop {
         match std::fs::read_to_string(".kismet") {
             Ok(x) => break x,
-            Err(_) => match set_current_dir("../") {
-                Ok(_) => (),
+            Err(_) if idx < 60 => match set_current_dir("../") {
+                Ok(()) => idx += 1,
                 Err(_) => return Err(CouldntParseSettings::CouldntRead),
             },
+            _ => return Err(CouldntParseSettings::CouldntRead),
         }
     };
 
@@ -268,7 +253,7 @@ fn get_settings() -> Result<Settings, CouldntParseSettings> {
         let settings = Settings::default();
         match ron::ser::to_string_pretty(&settings, DEFAULT_PRETTY_SETTINGS.clone()) {
             Ok(settings) => match fs::write(".kismet", settings) {
-                Ok(_) => (),
+                Ok(()) => (),
                 Err(_) => eprintln!("Failed to create default example input file"),
             },
             Err(_) => eprintln!("Failed to create .kismet file contents from default settings"),
@@ -317,7 +302,7 @@ mod tests {
             Err(x) => errors.push(x.into()),
         }
         report_errors(&errors, &engine);
-        assert!(errors.is_empty())
+        assert!(errors.is_empty());
     }
 
     #[test]
@@ -346,7 +331,7 @@ mod tests {
             };
             let mut engine = kismesis::Kismesis::new();
             engine.settings = settings;
-            match compile::compile_project(&mut engine) {
+            match compile::compile(&mut engine) {
                 Ok(()) => (),
                 Err(errors) => {
                     eprintln!("Errors for test in {}", path.display());
@@ -356,8 +341,6 @@ mod tests {
             }
             set_current_dir("../../").expect("Error returnting to main dir");
         }
-        if fail {
-            panic!();
-        }
+        assert!(!fail);
     }
 }
